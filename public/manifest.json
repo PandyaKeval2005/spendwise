@@ -1,0 +1,17 @@
+{
+  "name": "SpendWise — Personal Finance Manager",
+  "short_name": "SpendWise",
+  "description": "Smart, private personal salary and expense manager with real-time analytics and Excel reports",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#059669",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

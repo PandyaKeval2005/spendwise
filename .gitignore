@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build output
+dist/
+dist-ssr/
+
+# Environment files and credentials (NEVER commit secrets)
+.env
+.env*.local
+.env.production
+.env.staging
+
+# SQLite database and WAL files (personal financial data)
+data/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Vercel CLI metadata
+.vercel/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
