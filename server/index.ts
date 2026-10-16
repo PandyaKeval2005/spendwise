@@ -84,8 +84,7 @@ if (fs.existsSync(DIST_PATH)) {
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error('Unhandled server error:', err);
   res.status(500).json({
-    error: 'Internal server error occurred',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined,
+    error: err?.message || 'Internal server error occurred',
   });
 });
 

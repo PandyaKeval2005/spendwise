@@ -110,7 +110,7 @@ authRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
     });
   } catch (err: any) {
     console.error('Signup error:', err);
-    res.status(500).json({ error: 'An unexpected error occurred during signup' });
+    res.status(500).json({ error: err?.message || 'An unexpected error occurred during signup' });
   }
 });
 

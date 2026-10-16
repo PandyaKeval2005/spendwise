@@ -17,9 +17,13 @@ if (!fs.existsSync(DATA_DIR)) {
 const DB_PATH = path.resolve(DATA_DIR, 'spendwise.db');
 export const db = new DatabaseSync(DB_PATH);
 
-// Enable foreign keys and WAL mode for high performance and integrity
+// Enable foreign keys and appropriate journal mode
 db.exec('PRAGMA foreign_keys = ON;');
-db.exec('PRAGMA journal_mode = WAL;');
+if (process.env.VERCEL) {
+  db.exec('PRAGMA journal_mode = DELETE;');
+} else {
+  db.exec('PRAGMA journal_mode = WAL;');
+}
 
 // Initialize tables from embedded schema
 db.exec(SCHEMA_SQL);
