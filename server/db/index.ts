@@ -2,6 +2,7 @@ import { DatabaseSync } from 'node:sqlite';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { SCHEMA_SQL } from './schema';
 
 const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
@@ -20,18 +21,8 @@ export const db = new DatabaseSync(DB_PATH);
 db.exec('PRAGMA foreign_keys = ON;');
 db.exec('PRAGMA journal_mode = WAL;');
 
-// Initialize tables from schema.sql
-let schemaSql = '';
-const schemaCandidate1 = path.resolve(import.meta.dirname, 'schema.sql');
-const schemaCandidate2 = path.resolve(process.cwd(), 'server', 'db', 'schema.sql');
-if (fs.existsSync(schemaCandidate1)) {
-  schemaSql = fs.readFileSync(schemaCandidate1, 'utf-8');
-} else if (fs.existsSync(schemaCandidate2)) {
-  schemaSql = fs.readFileSync(schemaCandidate2, 'utf-8');
-}
-if (schemaSql) {
-  db.exec(schemaSql);
-}
+// Initialize tables from embedded schema
+db.exec(SCHEMA_SQL);
 
 export const DEFAULT_EXPENSE_CATEGORIES = [
   { name: 'Food & Dining', icon: 'Utensils', color: '#F59E0B' },

@@ -43,15 +43,30 @@ app.get('/api/health', (req: Request, res: Response) => {
   });
 });
 
-// Register API Routes
+// Register API Routes (support both /api/* and direct prefix for Vercel rewrite compatibility)
 app.use('/api/auth', authRouter);
+app.use('/auth', authRouter);
+
 app.use('/api/transactions', transactionsRouter);
+app.use('/transactions', transactionsRouter);
+
 app.use('/api/income', incomeRouter);
+app.use('/income', incomeRouter);
+
 app.use('/api/finances', financesRouter);
+app.use('/finances', financesRouter);
+
 app.use('/api/categories', categoriesRouter);
+app.use('/categories', categoriesRouter);
+
 app.use('/api/reports', reportsRouter);
+app.use('/reports', reportsRouter);
+
 app.use('/api/export', exportRouter);
+app.use('/export', exportRouter);
+
 app.use('/api/preferences', preferencesRouter);
+app.use('/preferences', preferencesRouter);
 
 // Serve static frontend files in production if dist/ exists
 const DIST_PATH = path.resolve(process.cwd(), 'dist');
